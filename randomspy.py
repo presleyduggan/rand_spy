@@ -6,7 +6,7 @@ import random as random
 spy = []
 num = []
 
-num.append(random.randrange(0,506))
+num.append(random.randrange(1,507))
 
 data = open("spy.txt")
 
