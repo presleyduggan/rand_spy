@@ -4,6 +4,7 @@ import pandas as pd
 import pandas_datareader as dr
 import random as random
 import yfinance as yf
+from yahooquery import Ticker
 
 app = Flask(__name__)
 @app.route('/')
@@ -20,6 +21,21 @@ def printrand():
   ticker = yf.Ticker(name)
 
   blank = '<br/>'
+
+  title = "Your random S&P 500 Stock is"+blank+blank
+
+  newTick = Ticker(name)
+  fullname = newTick.price[name]['longName']
+  about = newTick.summary_profile[name]['longBusinessSummary']
+
+  oneYear = ticker.history(period='1y')
+  print(oneYear)
+  length = len(oneYear['Close'])
+  before = oneYear['Close'][0]
+  after = oneYear['Close'][length-1]
+  change = round(((after-before)/before*100),2)
+  oneY = "1 Year Change = "+str(change)+"%"+blank
+
 
   threeMonth = ticker.history(period='3mo')
   length = len(threeMonth['Close'])
@@ -54,7 +70,7 @@ def printrand():
   change = round(((after-before)/before*100),2)
   fourS = "Today's Change = "+str(change) +"%"+blank
   currentP = "Current Price = $"+str(round(after,2))+blank
-  return name+blank+blank+currentP+blank+blank+oneS+twoS+threeS+fourS
+  return title+name+blank+fullname+blank+blank+about+blank+blank+currentP+blank+blank+oneY+oneS+twoS+threeS+fourS
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8080, debug=True)
