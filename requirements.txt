@@ -3,4 +3,5 @@ numpy
 pandas
 pandas_datareader
 yfinance
+yahooquery
 
