@@ -5,13 +5,6 @@ import pandas_datareader as dr
 import random as random
 import yfinance as yf
 
-def give_change(df):
-    length = len(df['Close'])
-    before = df['Close'][0]
-    after = df['Close'][length-1]
-    return ((after-before)/before*100)
-
-
 app = Flask(__name__)
 @app.route('/')
 def printrand():
@@ -26,18 +19,41 @@ def printrand():
   print(name)
   ticker = yf.Ticker(name)
 
+  blank = '<br/>'
+
   threeMonth = ticker.history(period='3mo')
-  threeChange = give_change(threeMonth)
-  print("3 Month Change = "+str(threeChange))
+  length = len(threeMonth['Close'])
+  before = threeMonth['Close'][0]
+  after = threeMonth['Close'][length-1]
+  change = ((after-before)/before*100)
+  oneS = "3 Month Change = "+str(change)+blank
+
+
   oneMonth = ticker.history(period='1mo')
-  oneChange = give_change(oneMonth)
-  print("1 Month Change = "+str(oneChange))
+  length = len(oneMonth['Close'])
+  before = oneMonth['Close'][0]
+  after = oneMonth['Close'][length-1]
+  change = ((after-before)/before*100)
+  twoS = "1 Month Change = "+str(change) +blank
+
+
+
   oneWeek = ticker.history(period='1wk')
-  weekChange = give_change(oneWeek)
-  print("1 Month Change = "+str(weekChange))
+  length = len(oneWeek['Close'])
+  before = oneWeek['Close'][0]
+  after = oneWeek['Close'][length-1]
+  change = ((after-before)/before*100)
+  threeS = "1 Week Change = "+str(change) +blank
+
+
+
   oneDay = ticker.history(period='2d')
-  dayChange = give_change(oneDay)
-  print("Today's Change = "+str(dayChange))
+  length = len(oneDay['Close'])
+  before = oneDay['Close'][0]
+  after = oneDay['Close'][length-1]
+  change = ((after-before)/before*100)
+  fourS = "Today's Change = "+str(change) +blank
+  return name+blank+blank+oneS+twoS+threeS+fourS
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8080, debug=True)

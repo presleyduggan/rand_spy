@@ -1,1 +1,6 @@
 Flask==1.1.2
+numpy
+pandas
+pandas_datareader
+yfinance
+
