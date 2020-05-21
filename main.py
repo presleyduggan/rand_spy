@@ -25,16 +25,16 @@ def printrand():
   length = len(threeMonth['Close'])
   before = threeMonth['Close'][0]
   after = threeMonth['Close'][length-1]
-  change = ((after-before)/before*100)
-  oneS = "3 Month Change = "+str(change)+blank
+  change = round(((after-before)/before*100),2)
+  oneS = "3 Month Change = "+str(change)+"%"+blank
 
 
   oneMonth = ticker.history(period='1mo')
   length = len(oneMonth['Close'])
   before = oneMonth['Close'][0]
   after = oneMonth['Close'][length-1]
-  change = ((after-before)/before*100)
-  twoS = "1 Month Change = "+str(change) +blank
+  change = round(((after-before)/before*100),2)
+  twoS = "1 Month Change = "+str(change) +"%"+blank
 
 
 
@@ -42,8 +42,8 @@ def printrand():
   length = len(oneWeek['Close'])
   before = oneWeek['Close'][0]
   after = oneWeek['Close'][length-1]
-  change = ((after-before)/before*100)
-  threeS = "1 Week Change = "+str(change) +blank
+  change = round(((after-before)/before*100),2)
+  threeS = "1 Week Change = "+str(change) +"%"+blank
 
 
 
@@ -51,9 +51,10 @@ def printrand():
   length = len(oneDay['Close'])
   before = oneDay['Close'][0]
   after = oneDay['Close'][length-1]
-  change = ((after-before)/before*100)
-  fourS = "Today's Change = "+str(change) +blank
-  return name+blank+blank+oneS+twoS+threeS+fourS
+  change = round(((after-before)/before*100),2)
+  fourS = "Today's Change = "+str(change) +"%"+blank
+  currentP = "Current Price = $"+str(round(after,2))+blank
+  return name+blank+blank+currentP+blank+blank+oneS+twoS+threeS+fourS
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8080, debug=True)
