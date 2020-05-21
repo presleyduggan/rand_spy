@@ -1,5 +1,5 @@
 import warnings
-warnings.filterwarnings('ignore') # ignore pandas depcreciated function warning
+warnings.filterwarnings('ignore') # ignore pandas depreciated function warning
 import numpy
 import pandas as pd
 import pandas_datareader as dr
