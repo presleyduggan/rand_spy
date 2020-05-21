@@ -41,7 +41,7 @@ df['Close'].plot()
 plt.show()
 print(df.info()) """
 
-ticker = yf.Ticker("CBRE")
+ticker = yf.Ticker(name)
 #print(name)
 #print(ticker.info)
 #print(ticker.info['shortName'])
