@@ -9,11 +9,11 @@ from yahooquery import Ticker
 app = Flask(__name__)
 @app.route('/')
 def printrand():
-  num = []
-  num.append(random.randrange(1,506))
+  num = random.randrange(1,506)
+  print(num)
   data = open("spy.txt")
   for position, line in enumerate(data):
-      if position in num:
+      if position == num:
           name = (line.strip())
   data.close()
 
@@ -26,10 +26,11 @@ def printrand():
 
   newTick = Ticker(name)
   fullname = newTick.price[name]['longName']
+  #print(newTick.summary_profile[name])
   about = newTick.summary_profile[name]['longBusinessSummary']
 
   oneYear = ticker.history(period='1y')
-  print(oneYear)
+  #print(oneYear)
   length = len(oneYear['Close'])
   before = oneYear['Close'][0]
   after = oneYear['Close'][length-1]
