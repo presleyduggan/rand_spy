@@ -13,7 +13,6 @@ def printrand():
 	data = open("spy.txt")
 	data = pd.read_csv('spy.txt', header=None)
 	name = data.iloc[num][0]
-	data.close()
 
 	ticker = yf.Ticker(name)
 
